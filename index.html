@@ -3,108 +3,1462 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruang Belajar IPS - Interaktif & Menyenangkan</title>
+    <title>Portal Media Pembelajaran Interaktif IPS Kelas 9</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
                     colors: {
                         brand: {
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                            700: '#4338ca',
+                            blue: '#1e40af',
+                            lightBlue: '#3b82f6',
+                            teal: '#0d9488',
+                            gold: '#f59e0b',
+                            dark: '#0f172a',
+                            light: '#f8fafc'
                         }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Custom scrollbar and aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .active-tab {
+            background-color: #1e40af !important;
+            color: #ffffff !important;
         }
-        ::-webkit-scrollbar-track {
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
-        ::-webkit-scrollbar-thumb {
+        .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 4px;
         }
-        ::-webkit-scrollbar-thumb:hover {
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
-        }
-        .hero-pattern {
-            background-color: #4f46e5;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 24px 24px;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen">
 
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <!-- HEADER & NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md transition-all duration-300 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
-                    <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
-                        <i class="fa-solid fa-earth-asia text-2xl"></i>
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-teal-500 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                        <i class="fa-solid font-bold fa-globe"></i>
                     </div>
                     <div>
-                        <span class="text-xl font-extrabold text-slate-900 tracking-tight">IPS<span class="text-indigo-600">Verse</span></span>
-                        <p class="text-xs font-medium text-slate-500">Portal Belajar Sosial Modern</p>
+                        <span class="text-lg font-bold text-slate-900 block leading-tight">IPS KELAS 9</span>
+                        <span class="text-xs text-teal-600 font-semibold tracking-wider block">KURIKULUM MERDEKA / K13</span>
                     </div>
                 </div>
 
-                <!-- Desktop Menu -->
-                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 bg-indigo-50 text-indigo-600">
-                        <i class="fa-solid fa-house mr-2"></i>Home
-                    </button>
-                    <button onclick="switchTab('materi')" id="nav-materi" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 transition-all duration-200">
-                        <i class="fa-solid fa-book-open mr-2"></i>Materi
-                    </button>
-                    <button onclick="switchTab('video')" id="nav-video" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 transition-all duration-200">
-                        <i class="fa-solid fa-play-circle mr-2"></i>Video
-                    </button>
-                    <button onclick="switchTab('tugas')" id="nav-tugas" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 transition-all duration-200">
-                        <i class="fa-solid fa-clipboard-question mr-2"></i>Tugas
-                    </button>
-                    <button onclick="switchTab('serba')" id="nav-serba" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 transition-all duration-200">
-                        <i class="fa-solid fa-lightbulb mr-2"></i>Serba-serbi
-                    </button>
+                <!-- Quick Search Input (Desktop) -->
+                <div class="hidden md:flex items-center flex-1 max-w-xs mx-8 relative">
+                    <input type="text" id="quickSearch" onkeyup="handleQuickSearch(event)" placeholder="Cari materi, soal, video..." 
+                        class="w-full pl-9 pr-4 py-1.5 text-sm rounded-full bg-slate-100 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 text-slate-400 text-sm"></i>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center space-x-1 text-sm font-medium">
+                    <button onclick="navigateTo('home')" class="nav-btn px-3 py-2 rounded-lg text-slate-700 hover:text-blue-700 hover:bg-slate-100 transition" id="nav-home"><i class="fa-solid fa-house mr-1"></i> Home</button>
+                    
+                    <!-- Dropdown Materi -->
+                    <div class="relative group">
+                        <button class="px-3 py-2 rounded-lg text-slate-700 hover:text-blue-700 hover:bg-slate-100 transition flex items-center">
+                            <i class="fa-solid fa-book-open mr-1"></i> Materi <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute left-0 mt-0 w-48 bg-white rounded-xl shadow-lg border border-slate-100 py-2 hidden group-hover:block animate-fade-in z-50">
+                            <a href="#" onclick="navigateTo('materi-s1')" class="block px-4 py-2 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-700"><i class="fa-solid fa-bookmark text-blue-500 mr-2"></i> Semester 1</a>
+                            <a href="#" onclick="navigateTo('materi-s2')" class="block px-4 py-2 text-sm text-slate-700 hover:bg-teal-50 hover:text-teal-700"><i class="fa-solid fa-bookmark text-teal-500 mr-2"></i> Semester 2</a>
+                        </div>
+                    </div>
+
+                    <button onclick="navigateTo('bank-soal')" class="nav-btn px-3 py-2 rounded-lg text-slate-700 hover:text-blue-700 hover:bg-slate-100 transition" id="nav-bank-soal"><i class="fa-solid fa-file-pen mr-1"></i> Soal</button>
+                    <button onclick="navigateTo('tugas')" class="nav-btn px-3 py-2 rounded-lg text-slate-700 hover:text-blue-700 hover:bg-slate-100 transition" id="nav-tugas"><i class="fa-solid fa-list-check mr-1"></i> Tugas</button>
+                    <button onclick="navigateTo('video')" class="nav-btn px-3 py-2 rounded-lg text-slate-700 hover:text-blue-700 hover:bg-slate-100 transition" id="nav-video"><i class="fa-solid fa-circle-play mr-1"></i> Video</button>
+                    <button onclick="navigateTo('buku')" class="nav-btn px-3 py-2 rounded-lg text-slate-700 hover:text-blue-700 hover:bg-slate-100 transition" id="nav-buku"><i class="fa-solid fa-book mr-1"></i> Buku</button>
+                    <button onclick="navigateTo('jurnal')" class="nav-btn px-3 py-2 rounded-lg text-slate-700 hover:text-blue-700 hover:bg-slate-100 transition" id="nav-jurnal"><i class="fa-solid fa-pen-to-square mr-1"></i> Jurnal</button>
+                    <button onclick="navigateTo('game')" class="nav-btn px-3 py-2 rounded-lg text-slate-700 hover:text-blue-700 hover:bg-slate-100 transition" id="nav-game"><i class="fa-solid fa-gamepad mr-1"></i> Game</button>
+                    <button onclick="navigateTo('tes')" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 font-semibold shadow-sm transition ml-2" id="nav-tes"><i class="fa-solid fa-award mr-1"></i> Tes Interaktif</button>
                 </nav>
 
                 <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button onclick="toggleMobileMenu()" class="p-2 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none">
-                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                <div class="lg:hidden flex items-center space-x-2">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Dropdown Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-1 shadow-lg">
-            <button onclick="switchTab('home'); toggleMobileMenu();" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-semibold bg-indigo-50 text-indigo-600">
-                <i class="fa-solid fa-house mr-3"></i>Home
-            </button>
-            <button onclick="switchTab('materi'); toggleMobileMenu();" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50">
-                <i class="fa-solid fa-book-open mr-3"></i>Materi
-            </button>
-            <button onclick="switchTab('video'); toggleMobileMenu();" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50">
-                <i class="fa-solid fa-play-circle mr-3"></i>Video
-            </button>
-            <button onclick="switchTab('tugas'); toggleMobileMenu();" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50">
-                <i class="fa-solid fa-clipboard-question mr-3"></i>Tugas
-            </button>
-            <button onclick="switchTab('serba'); toggleMobileMenu();" class="mobile-nav-btn w-full text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-600 h
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-1 shadow-inner">
+            <div class="mb-3 pt-2">
+                <input type="text" onkeyup="handleQuickSearch(event)" placeholder="Cari materi, soal, video..." 
+                    class="w-full pl-9 pr-4 py-2 text-sm rounded-lg bg-slate-100 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600">
+            </div>
+            <button onclick="navigateTo('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-slate-700 font-medium hover:bg-slate-100"><i class="fa-solid fa-house w-6"></i> Home</button>
+            <button onclick="navigateTo('materi-s1'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-slate-700 font-medium hover:bg-slate-100"><i class="fa-solid fa-book-open w-6 text-blue-600"></i> Materi Semester 1</button>
+            <button onclick="navigateTo('materi-s2'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-slate-700 font-medium hover:bg-slate-100"><i class="fa-solid fa-book-open w-6 text-teal-600"></i> Materi Semester 2</button>
+            <button onclick="navigateTo('bank-soal'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-slate-700 font-medium hover:bg-slate-100"><i class="fa-solid fa-file-pen w-6"></i> Bank Soal</button>
+            <button onclick="navigateTo('tugas'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-slate-700 font-medium hover:bg-slate-100"><i class="fa-solid fa-list-check w-6"></i> Tugas / LKPD</button>
+            <button onclick="navigateTo('video'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-slate-700 font-medium hover:bg-slate-100"><i class="fa-solid fa-circle-play w-6"></i> Video Pembelajaran</button>
+            <button onclick="navigateTo('buku'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-slate-700 font-medium hover:bg-slate-100"><i class="fa-solid fa-book w-6"></i> Buku Digital PDF</button>
+            <button onclick="navigateTo('jurnal'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-slate-700 font-medium hover:bg-slate-100"><i class="fa-solid fa-pen-to-square w-6"></i> Jurnal Refleksi</button>
+            <button onclick="navigateTo('game'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-slate-700 font-medium hover:bg-slate-100"><i class="fa-solid fa-gamepad w-6"></i> Game Kuis IPS</button>
+            <button onclick="navigateTo('tes'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700"><i class="fa-solid fa-award w-6"></i> Simulasi Tes Interaktif</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER (SPA Navigation) -->
+    <main class="flex-grow">
+        
+        <!-- 1. HOME / BERANDA SECTION -->
+        <section id="sec-home" class="page-section">
+            <!-- Hero Banner -->
+            <div class="relative bg-gradient-to-r from-blue-900 via-blue-800 to-teal-800 text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-400 text-slate-900 shadow-sm">
+                            <i class="fa-solid fa-star mr-1.5"></i> Portal Pembelajaran Digital IPS
+                        </span>
+                        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                            Jelajahi Dunia & Masyarakat Bersama <span class="text-teal-300">IPS Kelas 9</span>
+                        </h1>
+                        <p class="text-slate-200 text-base sm:text-lg max-w-2xl font-light leading-relaxed">
+                            Media interaktif lengkap berisi rangkuman materi, peta konsep, bank soal, video edukasi, e-book digital, serta game edukatif untuk meningkatkan pemahaman siswa.
+                        </p>
+                        <div class="flex flex-wrap gap-3 pt-2">
+                            <button onclick="navigateTo('materi-s1')" class="px-6 py-3 rounded-xl bg-teal-500 hover:bg-teal-600 text-white font-semibold shadow-lg hover:shadow-teal-500/30 transition transform hover:-translate-y-0.5">
+                                <i class="fa-solid fa-compass mr-2"></i> Mulai Belajar S1
+                            </button>
+                            <button onclick="navigateTo('tes')" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold backdrop-blur-md border border-white/20 transition">
+                                <i class="fa-solid fa-pen-clip mr-2"></i> Uji Kemampuan
+                            </button>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-sm bg-white/10 p-4 rounded-3xl backdrop-blur-md border border-white/20 shadow-2xl">
+                            <div class="bg-slate-900 rounded-2xl overflow-hidden shadow-inner p-6 text-center text-white relative">
+                                <div class="w-20 h-20 bg-blue-500/20 text-teal-300 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl border border-teal-400/30">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <h3 class="font-bold text-xl mb-1">Siap Hadapi Ujian?</h3>
+                                <p class="text-slate-300 text-xs mb-4">Akses simulasi kuis interaktif dengan skor real-time & pembahasan lengkap.</p>
+                                <button onclick="navigateTo('game')" class="w-full py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-900 font-bold rounded-xl shadow-md text-sm transition">
+                                    <i class="fa-solid fa-gamepad mr-1.5"></i> Main Game Kuis IPS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kartu Statistik -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white p-5 rounded-2xl shadow-md border border-slate-100 flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-extrabold text-slate-800 block">4 Bab</span>
+                            <span class="text-xs text-slate-500 font-medium">Materi S1 & S2</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-md border border-slate-100 flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-extrabold text-slate-800 block">50+</span>
+                            <span class="text-xs text-slate-500 font-medium">Bank Soal & Pembahasan</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-md border border-slate-100 flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-extrabold text-slate-800 block">8+</span>
+                            <span class="text-xs text-slate-500 font-medium">Video Edukasi</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-md border border-slate-100 flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-extrabold text-slate-800 block">Interactive</span>
+                            <span class="text-xs text-slate-500 font-medium">Game & Simulasi Tes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Highlight Grid -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Fitur Unggulan Belajar IPS</h2>
+                    <p class="text-slate-600 mt-2 text-sm sm:text-base">Segala kebutuhan belajar Ilmu Pengetahuan Sosial kelas 9 dalam satu genggaman interaktif.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Ringkasan Materi Card -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition duration-300 group">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Rangkuman & Peta Konsep</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">Penjelasan materi terstruktur per bab dilengkapi indikator pencapaian dan infografis peta konsep.</p>
+                        <button onclick="navigateTo('materi-s1')" class="text-blue-600 hover:text-blue-800 text-sm font-semibold inline-flex items-center">
+                            Akses Materi <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Interactive Games Card -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition duration-300 group">
+                        <div class="w-12 h-12 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-puzzle-piece"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Game Edukasi IPS</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">Belajar seru dengan tebak peta benua, tokoh sejarah, dan kuis cepat tepat dengan skor otomatis.</p>
+                        <button onclick="navigateTo('game')" class="text-teal-600 hover:text-teal-800 text-sm font-semibold inline-flex items-center">
+                            Mainkan Sekarang <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+                        </button>
+                    </div>
+
+                    <!-- Digital Library Card -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition duration-300 group">
+                        <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-book-bookmark"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Buku Digital & LKPD</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">Akses e-Book Kurikulum Merdeka/K13 resmi beserta Lembar Kerja Peserta Didik (LKPD) mandiri.</p>
+                        <button onclick="navigateTo('buku')" class="text-amber-600 hover:text-amber-800 text-sm font-semibold inline-flex items-center">
+                            Buka Perpustakaan <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. MATERI SEMESTER 1 SECTION -->
+        <section id="sec-materi-s1" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="border-b border-slate-200 pb-5 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">Kurikulum Merdeka / K13</span>
+                        <h1 class="text-3xl font-extrabold text-slate-900 mt-2">Materi IPS Kelas 9 - Semester 1</h1>
+                        <p class="text-slate-600 text-sm mt-1">Sosiologi & Geografi Regional Benua</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="toggleAllAccordions('s1', true)" class="px-3 py-1.5 text-xs bg-slate-200 hover:bg-slate-300 rounded-lg text-slate-700 font-medium transition">Buka Semua</button>
+                        <button onclick="toggleAllAccordions('s1', false)" class="px-3 py-1.5 text-xs bg-slate-200 hover:bg-slate-300 rounded-lg text-slate-700 font-medium transition">Tutup Semua</button>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- BAB 1 CARD -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="bg-gradient-to-r from-blue-700 to-blue-600 text-white p-6 cursor-pointer flex justify-between items-center" onclick="toggleBab('bab1-content')">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-xl font-bold border border-white/20">
+                                    01
+                                </div>
+                                <div>
+                                    <h2 class="text-xl font-bold">Bab 1: Perubahan Sosial Budaya dan Globalisasi</h2>
+                                    <p class="text-blue-100 text-xs mt-0.5"><i class="fa-solid fa-users mr-1"></i> Aspek Sosiologi & Dinamika Masyarakat</p>
+                                </div>
+                            </div>
+                            <i id="icon-bab1-content" class="fa-solid fa-chevron-down transition-transform duration-300 text-lg"></i>
+                        </div>
+
+                        <div id="bab1-content" class="p-6 space-y-6 hidden border-t border-slate-100">
+                            <!-- Indikator Pencapaian -->
+                            <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100">
+                                <h4 class="font-bold text-blue-900 text-sm mb-2 flex items-center">
+                                    <i class="fa-solid fa-bullseye mr-2 text-blue-600"></i> Indikator Pencapaian Pembelajaran:
+                                </h4>
+                                <ul class="list-disc list-inside text-xs text-slate-700 space-y-1 pl-1">
+                                    <li>Menganalisis bentuk-bentuk perubahan sosial budaya di masyarakat.</li>
+                                    <li>Mengidentifikasi faktor pendorong dan penghambat perubahan sosial budaya.</li>
+                                    <li>Memahami konsep globalisasi di bidang budaya, komunikasi, ekonomi, iptek, dan transportasi.</li>
+                                    <li>Merumuskan upaya menghadapi dampak globalisasi.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Peta Konsep Ringkas -->
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm mb-3"><i class="fa-solid fa-sitemap text-teal-600 mr-2"></i> Peta Konsep Bab 1</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-center font-medium">
+                                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                                        <div class="text-blue-700 font-bold mb-1">Bentuk Perubahan</div>
+                                        <p class="text-slate-600">Waktu (Evolusi/Revolusi), Pengaruh (Kecil/Besar), Perencanaan</p>
+                                    </div>
+                                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                                        <div class="text-teal-700 font-bold mb-1">Faktor Penyebab</div>
+                                        <p class="text-slate-600">Internal (Demografi, Penemuan Baru) & Eksternal (Lingkungan, Perang)</p>
+                                    </div>
+                                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                                        <div class="text-amber-700 font-bold mb-1">Globalisasi</div>
+                                        <p class="text-slate-600">Dampak Positif (Efisiensi) & Dampak Negatif (Westernisasi, Demoralisasi)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Rangkuman Materi Detail -->
+                            <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                                <h4 class="font-bold text-slate-900 text-base border-b pb-1">Ringkasan Materi Utama</h4>
+                                <div>
+                                    <h5 class="font-bold text-blue-800">1. Perubahan Sosial Budaya</h5>
+                                    <p class="mt-1">Perubahan sosial meliputi perubahan fungsi masyarakat, norma, dan pola perilaku. Sedangkan perubahan budaya mencakup artefak, ilmu pengetahuan, dan nilai-nilai seni. Keduanya saling berkaitan erat (dinamakan Perubahan Sosial Budaya).</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-800">2. Dampak Globalisasi & Upaya Menghadapinya</h5>
+                                    <p class="mt-1">Globalisasi menyatukan negara-negara di dunia tanpa batas. Sikap kritis yang diperlukan: Memperkuat filter budaya lokal, meningkatkan kualitas SDM, serta mencintai produk dalam negeri.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BAB 2 CARD -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="bg-gradient-to-r from-teal-700 to-teal-600 text-white p-6 cursor-pointer flex justify-between items-center" onclick="toggleBab('bab2-content')">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-xl font-bold border border-white/20">
+                                    02
+                                </div>
+                                <div>
+                                    <h2 class="text-xl font-bold">Bab 2: Interaksi Antarruang Negara-Negara Asia dan Benua Lainnya</h2>
+                                    <p class="text-teal-100 text-xs mt-0.5"><i class="fa-solid fa-earth-americas mr-1"></i> Aspek Geografi Regional World</p>
+                                </div>
+                            </div>
+                            <i id="icon-bab2-content" class="fa-solid fa-chevron-down transition-transform duration-300 text-lg"></i>
+                        </div>
+
+                        <div id="bab2-content" class="p-6 space-y-6 hidden border-t border-slate-100">
+                            <!-- Indikator -->
+                            <div class="bg-teal-50/50 p-4 rounded-xl border border-teal-100">
+                                <h4 class="font-bold text-teal-900 text-sm mb-2 flex items-center">
+                                    <i class="fa-solid fa-bullseye mr-2 text-teal-600"></i> Indikator Pencapaian Pembelajaran:
+                                </h4>
+                                <ul class="list-disc list-inside text-xs text-slate-700 space-y-1 pl-1">
+                                    <li>Menunjukkan letak dan luas Benua Asia serta benua-benua lainnya.</li>
+                                    <li>Menganalisis kondisi alam dan dinamika penduduk benua-benua di dunia.</li>
+                                    <li>Menganalisis pengaruh perubahan ruang dan interaksi antarruang terhadap ekonomi, sosial, budaya, dan pendidikan.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Content Details -->
+                            <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                                <h4 class="font-bold text-slate-900 text-base border-b pb-1">Karakteristik Benua di Dunia</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                        <span class="font-bold text-teal-800 block text-base mb-1">1. Benua Asia</span>
+                                        <p class="text-xs text-slate-600">Benua terluas di dunia (44 juta km²). Memiliki gurun pasir luas, pegunungan tertinggi (Himalaya), dan ras penduduk dominan Mongoloid serta Kaukasoid.</p>
+                                    </div>
+                                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                        <span class="font-bold text-teal-800 block text-base mb-1">2. Benua Amerika</span>
+                                        <p class="text-xs text-slate-600">Julukan "Benua Merah" (Suku Indian). Memiliki sungai terpanjang/terbesar (Amazon) serta iklim yang sangat bervariasi dari kutub hingga tropis.</p>
+                                    </div>
+                                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                        <span class="font-bold text-teal-800 block text-base mb-1">3. Benua Eropa</span>
+                                        <p class="text-xs text-slate-600">Julukan "Benua Biru". Terhubung secara daratan dengan Asia (Eurasia). Tingkat pertumbuhan penduduk sangat rendah (aging population).</p>
+                                    </div>
+                                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                        <span class="font-bold text-teal-800 block text-base mb-1">4. Benua Afrika & Australia</span>
+                                        <p class="text-xs text-slate-600">Afrika ("Benua Hitam") kaya mineral emas & gurun Sahara. Australia merupakan benua sekaligus satu negara unik.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MATERI SEMESTER 2 SECTION -->
+        <section id="sec-materi-s2" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="border-b border-slate-200 pb-5 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-teal-600 bg-teal-50 px-3 py-1 rounded-full">Kurikulum Merdeka / K13</span>
+                        <h1 class="text-3xl font-extrabold text-slate-900 mt-2">Materi IPS Kelas 9 - Semester 2</h1>
+                        <p class="text-slate-600 text-sm mt-1">Ekonomi Internasional & Sejarah Kemerdekaan RI</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- BAB 3 CARD -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="bg-gradient-to-r from-amber-600 to-amber-500 text-white p-6 cursor-pointer flex justify-between items-center" onclick="toggleBab('bab3-content')">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-xl font-bold border border-white/20">
+                                    03
+                                </div>
+                                <div>
+                                    <h2 class="text-xl font-bold">Bab 3: Ketergantungan Antarruang dan Kesejahteraan Masyarakat</h2>
+                                    <p class="text-amber-100 text-xs mt-0.5"><i class="fa-solid fa-chart-line mr-1"></i> Aspek Ekonomi & Pasar Bebas</p>
+                                </div>
+                            </div>
+                            <i id="icon-bab3-content" class="fa-solid fa-chevron-down transition-transform duration-300 text-lg"></i>
+                        </div>
+
+                        <div id="bab3-content" class="p-6 space-y-6 hidden border-t border-slate-100">
+                            <!-- Indikator -->
+                            <div class="bg-amber-50/50 p-4 rounded-xl border border-amber-100">
+                                <h4 class="font-bold text-amber-900 text-sm mb-2 flex items-center">
+                                    <i class="fa-solid fa-bullseye mr-2 text-amber-600"></i> Indikator Utama:
+                                </h4>
+                                <ul class="list-disc list-inside text-xs text-slate-700 space-y-1 pl-1">
+                                    <li>Menjelaskan perdagangan internasional dan faktor pendorongnya (Ekspor/Impor).</li>
+                                    <li>Menganalisis peran Ekonomi Kreatif dalam meningkatkan kesejahteraan.</li>
+                                    <li>Mengenal organisasi Pasar Bebas (MEA, AFTA, APEC, WTO).</li>
+                                </ul>
+                            </div>
+
+                            <!-- Content Details -->
+                            <div class="space-y-4 text-sm text-slate-700 leading-relaxed">
+                                <h4 class="font-bold text-slate-900 text-base border-b pb-1">Perdagangan Internasional & Ekonomi Kreatif</h4>
+                                <p>Perdagangan internasional terjadi karena perbedaan Sumber Daya Alam (SDA), penguasaan ilmu pengetahuan & teknologi, efisiensi biaya produksi, dan selera masyarakat.</p>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                    <h5 class="font-bold text-slate-800 text-sm">Subsektor Ekonomi Kreatif:</h5>
+                                    <p class="text-xs text-slate-600 mt-1">Kuliner, Kriya, Fashion, Desain Grafis, Pengembang Game, Musik, Periklanan, dan Arsitektur.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BAB 4 CARD -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="bg-gradient-to-r from-red-700 to-rose-600 text-white p-6 cursor-pointer flex justify-between items-center" onclick="toggleBab('bab4-content')">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-xl font-bold border border-white/20">
+                                    04
+                                </div>
+                                <div>
+                                    <h2 class="text-xl font-bold">Bab 4: Indonesia dari Masa Kemerdekaan Hingga Masa Reformasi</h2>
+                                    <p class="text-rose-100 text-xs mt-0.5"><i class="fa-solid fa-landmark mr-1"></i> Aspek Sejarah Perjuangan Bangsa</p>
+                                </div>
+                            </div>
+                            <i id="icon-bab4-content" class="fa-solid fa-chevron-down transition-transform duration-300 text-lg"></i>
+                        </div>
+
+                        <div id="bab4-content" class="p-6 space-y-6 hidden border-t border-slate-100">
+                            <!-- Timeline Periodisasi Sejarah -->
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm mb-4"><i class="fa-solid fa-timeline text-red-600 mr-2"></i> Garis Waktu Sejarah Indonesia Modern</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+                                    <div class="p-3 bg-red-50 border border-red-200 rounded-xl">
+                                        <span class="font-bold text-red-800 block text-sm">Proklamasi & Fisik</span>
+                                        <span class="text-slate-500 font-medium">1945 - 1950</span>
+                                        <p class="mt-1 text-slate-600">Peristiwa Rengasdengklok, Perjuangan Fisik & Diplomasi (Linggajati, Renville, KMB).</p>
+                                    </div>
+                                    <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl">
+                                        <span class="font-bold text-blue-800 block text-sm">Demokrasi Parlementer & Terpimpin</span>
+                                        <span class="text-slate-500 font-medium">1950 - 1965</span>
+                                        <p class="mt-1 text-slate-600">Pemilu 1955, Dekrit Presiden 5 Juli 1959, Pembebasan Irian Barat.</p>
+                                    </div>
+                                    <div class="p-3 bg-teal-50 border border-teal-200 rounded-xl">
+                                        <span class="font-bold text-teal-800 block text-sm">Masa Orde Baru</span>
+                                        <span class="text-slate-500 font-medium">1966 - 1998</span>
+                                        <p class="mt-1 text-slate-600">Pemerintahan Presiden Soeharto, Fokus Pembangunan Ekonomi (Pelita) & Stabilitas Politik.</p>
+                                    </div>
+                                    <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl">
+                                        <span class="font-bold text-amber-800 block text-sm">Masa Reformasi</span>
+                                        <span class="text-slate-500 font-medium">1998 - Sekarang</span>
+                                        <p class="mt-1 text-slate-600">Gerakan Mahasiswa 1998, Amandemen UUD 1945, Otonomi Daerah, Pemilu Langsung.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. BANK SOAL SECTION -->
+        <section id="sec-bank-soal" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="border-b border-slate-200 pb-5 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h1 class="text-3xl font-extrabold text-slate-900">Bank Soal Latihan IPS</h1>
+                        <p class="text-slate-600 text-sm mt-1">Latihan Pilihan Ganda & Esai terstruktur dengan Kunci Pembahasan.</p>
+                    </div>
+                    <!-- Filter Bab & Tipe -->
+                    <div class="flex flex-wrap gap-2">
+                        <select id="filterBabSoal" onchange="filterBankSoal()" class="px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-600">
+                            <option value="all">Semua Bab (Bab 1 - Bab 4)</option>
+                            <option value="1">Bab 1: Perubahan Sosial</option>
+                            <option value="2">Bab 2: Benua & Interaksi</option>
+                            <option value="3">Bab 3: Ekonomi & Pasar Bebas</option>
+                            <option value="4">Bab 4: Sejarah Indonesia</option>
+                        </select>
+                        <select id="filterTipeSoal" onchange="filterBankSoal()" class="px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-600">
+                            <option value="all">Semua Tipe Soal</option>
+                            <option value="pg">Pilihan Ganda</option>
+                            <option value="esai">Esai / Uraian</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Soal Cards Container -->
+                <div id="bankSoalContainer" class="space-y-4">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. TUGAS / LKPD SECTION -->
+        <section id="sec-tugas" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="border-b border-slate-200 pb-5 mb-8">
+                    <h1 class="text-3xl font-extrabold text-slate-900">Lembar Kerja Peserta Didik (LKPD) & Tugas</h1>
+                    <p class="text-slate-600 text-sm mt-1">Unduh instruksi tugas, kerjakan mandiri/kelompok, dan periksa status pengumpulan virtual.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="tugasListContainer">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. VIDEO PEMBELAJARAN SECTION -->
+        <section id="sec-video" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="border-b border-slate-200 pb-5 mb-8">
+                    <h1 class="text-3xl font-extrabold text-slate-900">Video Edukasi IPS Interaktif</h1>
+                    <p class="text-slate-600 text-sm mt-1">Video tayangan materi sejarah, geografi, ekonomi, dan sosiologi terpilih.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="videoGridContainer">
+                    <!-- Dynamic Video Grid -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. BUKU DIGITAL SECTION -->
+        <section id="sec-buku" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="border-b border-slate-200 pb-5 mb-8">
+                    <h1 class="text-3xl font-extrabold text-slate-900">Perpustakaan Buku Digital IPS</h1>
+                    <p class="text-slate-600 text-sm mt-1">Buku Siswa & Buku Guru Kurikulum Merdeka / K13 Kelas 9.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="bukuGridContainer">
+                    <!-- Books Rendered Here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. JURNAL SECTION -->
+        <section id="sec-jurnal" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="border-b border-slate-200 pb-5 mb-8">
+                    <h1 class="text-3xl font-extrabold text-slate-900">Jurnal Refleksi Belajar Siswa</h1>
+                    <p class="text-slate-600 text-sm mt-1">Catat pemahaman materi, kendala, dan jurnal kegiatan IPS harian/mingguan.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Form Input Jurnal -->
+                    <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 h-fit">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                            <i class="fa-solid fa-pen text-blue-600 mr-2"></i> Tulis Jurnal Baru
+                        </h3>
+                        <form id="formJurnal" onsubmit="saveJurnal(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Siswa / Guru</label>
+                                <input type="text" id="jurnalNama" required placeholder="Contoh: Budi Santoso" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Materi / Bab yang Dipelajari</label>
+                                <input type="text" id="jurnalMateri" required placeholder="Contoh: Globalisasi Bab 1" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Refleksi & Pemahaman Saya</label>
+                                <textarea id="jurnalIsi" rows="4" required placeholder="Apa hal menarik yang kamu pelajari hari ini? Apa kendala yang dialami?" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-sm transition shadow-sm">
+                                <i class="fa-solid fa-paper-plane mr-1.5"></i> Simpan Catatan Jurnal
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- List Saved Jurnal -->
+                    <div class="lg:col-span-7">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center justify-between">
+                            <span><i class="fa-solid fa-clock-rotate-left text-teal-600 mr-2"></i> Riwayat Jurnal Terakhir</span>
+                            <span id="jurnalCount" class="text-xs font-normal text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">0 Catatan</span>
+                        </h3>
+                        <div id="jurnalListContainer" class="space-y-3 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
+                            <!-- Rendered dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. GAME IPS SECTION -->
+        <section id="sec-game" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="border-b border-slate-200 pb-5 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h1 class="text-3xl font-extrabold text-slate-900">Game Edukasi IPS Interaktif</h1>
+                        <p class="text-slate-600 text-sm mt-1">Uji kejelian visual peta, pahlawan nasional, dan pengetahuan IPS melalui mini game seru!</p>
+                    </div>
+                    <div class="bg-amber-100 text-amber-900 px-4 py-2 rounded-xl text-sm font-bold flex items-center shadow-sm">
+                        <i class="fa-solid fa-trophy text-amber-600 text-lg mr-2"></i> High Score: <span id="gameHighScore" class="ml-1 text-lg">0</span>
+                    </div>
+                </div>
+
+                <!-- Game Selector Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Game 1 Card -->
+                    <div class="bg-gradient-to-br from-indigo-900 to-blue-800 text-white rounded-2xl p-6 shadow-md flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs bg-indigo-500/30 border border-indigo-400/30 text-indigo-200 px-3 py-1 rounded-full font-semibold">Game 1</span>
+                            <h3 class="text-2xl font-extrabold mt-3 mb-2">Tebak Gambar Pahlawan & Peta</h3>
+                            <p class="text-slate-300 text-sm">Kenali tokoh proklamator, pahlawan nasional, dan siluet benua dunia.</p>
+                        </div>
+                        <button onclick="startTebakGambarGame()" class="mt-6 w-full py-3 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-xl transition shadow-md flex items-center justify-center">
+                            <i class="fa-solid fa-play mr-2"></i> Mainkan Game Tebak Gambar
+                        </button>
+                    </div>
+
+                    <!-- Game 2 Card -->
+                    <div class="bg-gradient-to-br from-teal-900 to-emerald-800 text-white rounded-2xl p-6 shadow-md flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs bg-teal-500/30 border border-teal-400/30 text-teal-200 px-3 py-1 rounded-full font-semibold">Game 2</span>
+                            <h3 class="text-2xl font-extrabold mt-3 mb-2">Match The Card (Pasangan Istilah)</h3>
+                            <p class="text-slate-300 text-sm">Pasangkan istilah IPS dengan artinya yang tepat secara cepat!</p>
+                        </div>
+                        <button onclick="startMatchGame()" class="mt-6 w-full py-3 bg-teal-400 hover:bg-teal-300 text-slate-900 font-bold rounded-xl transition shadow-md flex items-center justify-center">
+                            <i class="fa-solid fa-rotate mr-2"></i> Mainkan Match Card IPS
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Active Game Arena Area -->
+                <div id="gameArena" class="hidden bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 relative">
+                    <!-- Content populated by active game -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. TES / EVALUASI SECTION -->
+        <section id="sec-tes" class="page-section hidden py-10">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
+                    <!-- Quiz Header / Timer Banner -->
+                    <div class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white p-6 flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <span class="text-xs bg-blue-500/30 px-3 py-1 rounded-full font-semibold text-blue-200">Simulasi Evaluasi Semester</span>
+                            <h2 class="text-xl sm:text-2xl font-extrabold mt-1">Tes Interaktif IPS Kelas 9</h2>
+                        </div>
+                        <div id="quizTimerBox" class="hidden bg-slate-900/80 px-4 py-2 rounded-xl border border-white/20 text-right">
+                            <span class="text-xs text-slate-400 block">Sisa Waktu:</span>
+                            <span id="quizTimer" class="font-mono text-xl font-bold text-amber-400">10:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Intro Screen -->
+                    <div id="quizStartScreen" class="p-8 text-center space-y-6">
+                        <div class="w-20 h-20 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-3xl mx-auto">
+                            <i class="fa-solid fa-file-signature"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-800">Petunjuk Pengerjaan Ujian</h3>
+                            <p class="text-slate-600 text-sm max-w-md mx-auto mt-2">
+                                Tes terdiri dari 10 soal Pilihan Ganda gabungan Semester 1 & 2. Waktu pengerjaan adalah 10 menit. Skor langsung keluar setelah selesai.
+                            </p>
+                        </div>
+                        <button onclick="startQuizSimulation()" class="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg transition transform hover:scale-105">
+                            <i class="fa-solid fa-circle-play mr-2"></i> Mulai Tes Sekarang
+                        </button>
+                    </div>
+
+                    <!-- Quiz Question Container Screen -->
+                    <div id="quizQuestionScreen" class="hidden p-6 sm:p-8">
+                        <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
+                            <span id="quizProgressText" class="text-sm font-semibold text-blue-700">Soal 1 dari 10</span>
+                            <span id="quizCategoryBadge" class="text-xs font-semibold px-2.5 py-1 bg-slate-100 rounded-md text-slate-600">Sosiologi</span>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 id="quizQuestionTitle" class="text-lg font-bold text-slate-800 leading-snug">
+                                Pertanyaan Soal...
+                            </h3>
+                        </div>
+
+                        <!-- Options List -->
+                        <div id="quizOptionsContainer" class="space-y-3 mb-8">
+                            <!-- Dynamic Options Buttons -->
+                        </div>
+
+                        <div class="flex justify-between items-center pt-4 border-t border-slate-100">
+                            <button id="quizPrevBtn" onclick="navigateQuiz(-1)" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-semibold transition disabled:opacity-50">
+                                <i class="fa-solid fa-arrow-left mr-1"></i> Sebelum
+                            </button>
+                            <button id="quizNextBtn" onclick="navigateQuiz(1)" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold transition">
+                                Lanjut <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Result Screen -->
+                    <div id="quizResultScreen" class="hidden p-8 text-center space-y-6">
+                        <div id="resultIcon" class="w-24 h-24 rounded-full flex items-center justify-center text-4xl mx-auto shadow-inner">
+                            <!-- Dynamic Icon -->
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-extrabold text-slate-800">Hasil Tes Evaluasi Kamu</h3>
+                            <p id="resultFeedback" class="text-slate-600 text-sm mt-1">Luar biasa! Kamu sangat menguasai materi IPS.</p>
+                        </div>
+
+                        <div class="max-w-xs mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                            <span class="text-xs text-slate-500 uppercase tracking-wider block font-bold">Skor Akhir</span>
+                            <span id="resultScore" class="text-5xl font-black text-blue-700 block my-1">80 / 100</span>
+                            <span id="resultAccuracy" class="text-xs text-emerald-600 font-semibold">8 dari 10 Soal Benar</span>
+                        </div>
+
+                        <div class="flex justify-center space-x-3 pt-2">
+                            <button onclick="startQuizSimulation()" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-sm shadow transition">
+                                <i class="fa-solid fa-rotate-right mr-1.5"></i> Coba Ulang Tes
+                            </button>
+                            <button onclick="navigateTo('bank-soal')" class="px-6 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold rounded-xl text-sm transition">
+                                Pelajari Pembahasan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- GLOBAL REUSABLE MODAL (For Video, PDF, & Search Results) -->
+    <div id="globalModal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full overflow-hidden transform transition-all flex flex-col max-h-[90vh]">
+            <div class="p-4 bg-slate-900 text-white flex justify-between items-center">
+                <h3 id="modalTitle" class="font-bold text-base line-clamp-1">Detail Konten</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white p-1 rounded-lg">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="p-6 overflow-y-auto flex-grow custom-scrollbar">
+                <!-- Modal Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-10 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <div class="flex items-center space-x-2 text-white font-bold text-lg mb-3">
+                    <i class="fa-solid fa-globe text-teal-400"></i>
+                    <span>Portal IPS Kelas 9</span>
+                </div>
+                <p class="leading-relaxed">Media Pembelajaran Interaktif Ilmu Pengetahuan Sosial Sekolah Menengah Pertama (SMP/MTs) berbasis Kurikulum Merdeka & K13.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold text-sm mb-3">Akses Cepat Menu</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" onclick="navigateTo('materi-s1')" class="hover:text-teal-400">Materi Semester 1</a></li>
+                    <li><a href="#" onclick="navigateTo('materi-s2')" class="hover:text-teal-400">Materi Semester 2</a></li>
+                    <li><a href="#" onclick="navigateTo('bank-soal')" class="hover:text-teal-400">Bank Soal & Pembahasan</a></li>
+                    <li><a href="#" onclick="navigateTo('tes')" class="hover:text-teal-400">Simulasi Tes Evaluasi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold text-sm mb-3">Informasi Kurikulum</h4>
+                <p class="leading-relaxed">Materi mencakup 4 pilar IPS: Sosiologi, Geografi Regional, Ekonomi & Kesejahteraan, serta Sejarah Perjuangan Bangsa Indonesia.</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 pt-6 text-center text-slate-500">
+            <p>&copy; 2026 Portal Media Pembelajaran IPS Kelas 9 Interaktif. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* ==========================================
+           1. DATA STORE (BANK SOAL, VIDEO, BUKU, QUIZ)
+           ========================================== */
+        const BANK_SOAL_DATA = [
+            {
+                id: 1,
+                bab: 1,
+                tipe: 'pg',
+                soal: 'Perubahan sosial budaya yang terjadi secara lambat dan memerlukan waktu yang lama dinamakan...',
+                opsi: ['A. Revolusi', 'B. Evolusi', 'C. Inovasi', 'D. Modernisasi'],
+                jawaban: 'B. Evolusi',
+                pembahasan: 'Evolusi adalah perubahan sosial budaya yang berlangsung dalam kurun waktu lama tanpa ada kehendak khusus dari masyarakat.'
+            },
+            {
+                id: 2,
+                bab: 1,
+                tipe: 'esai',
+                soal: 'Sebutkan 3 dampak positif dan 3 dampak negatif globalisasi di bidang budaya!',
+                jawaban: 'Positif: Perubahan tata nilai, berkembangnya ilmu pengetahuan/teknologi, tingkat kehidupan lebih baik. Negatif: Westernisasi, demoralisasi, kesenjangan sosial budaya.',
+                pembahasan: 'Globalisasi berpengaruh ganda pada nilai budaya nasional.'
+            },
+            {
+                id: 3,
+                bab: 2,
+                tipe: 'pg',
+                soal: 'Benua terluas di dunia yang dibatasi oleh Samudra Arktik di utara dan Samudra Hindia di selatan adalah...',
+                opsi: ['A. Benua Amerika', 'B. Benua Eropa', 'C. Benua Asia', 'D. Benua Afrika'],
+                jawaban: 'C. Benua Asia',
+                pembahasan: 'Benua Asia memiliki luas sekitar 44.000.000 km² dan merupakan benua terluas di bumi.'
+            },
+            {
+                id: 4,
+                bab: 3,
+                tipe: 'pg',
+                soal: 'Berikut yang BUKAN merupakan faktor pendorong terjadinya perdagangan internasional adalah...',
+                opsi: ['A. Perbedaan Sumber Daya Alam', 'B. Kesamaan mata uang antar negara', 'C. Perbedaan teknologi', 'D. Efisiensi biaya produksi'],
+                jawaban: 'B. Kesamaan mata uang antar negara',
+                pembahasan: 'Mata uang tiap negara umumnya berbeda, sehingga menjadi salah satu hambatan/tantangan pembayaran, bukan pendorong.'
+            },
+            {
+                id: 5,
+                bab: 4,
+                tipe: 'pg',
+                soal: 'Peristiwa diculiknya Ir. Soekarno dan Drs. Moh. Hatta oleh para pemuda ke Rengasdengklok bertujuan untuk...',
+                opsi: [
+                    'A. Memaksa mereka bekerja sama dengan Jepang',
+                    'B. Menjauhkan mereka dari pengaruh Jepang agar segera memproklamasikan kemerdekaan',
+                    'C. Menghindari serangan tentara Sekutu',
+                    'D. Menyiapkan teks UUD 1945'
+                ],
+                jawaban: 'B. Menjauhkan mereka dari pengaruh Jepang agar segera memproklamasikan kemerdekaan',
+                pembahasan: 'Golongan muda membawa Soekarno-Hatta ke Rengasdengklok agar tidak terpengaruh janji-janji kemerdekaan dari pihak Jepang.'
+            }
+        ];
+
+        const TUGAS_DATA = [
+            {
+                id: 1,
+                judul: 'LKPD 1: Observasi Perubahan Sosial di Lingkungan Sekitar',
+                kategori: 'Tugas Mandiri',
+                deadline: '12 Oktober 2026',
+                deskripsi: 'Amati 2 contoh perubahan sosial budaya yang terjadi di desa/kota tempat tinggalmu akibat masuknya teknologi digital.'
+            },
+            {
+                id: 2,
+                judul: 'LKPD 2: Makalah Analisis Karakteristik Benua Asia & Eropa',
+                kategori: 'Tugas Kelompok',
+                deadline: '20 Oktober 2026',
+                deskripsi: 'Buat perbandingan komparatif terkait kondisi fisik, iklim, dan ras penduduk antara Asia dan Eropa.'
+            }
+        ];
+
+        const VIDEO_DATA = [
+            {
+                id: 1,
+                judul: 'Memahami Globalisasi & Dampaknya bagi Remaja',
+                kategori: 'Sosiologi',
+                durasi: '08:45',
+                embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+            },
+            {
+                id: 2,
+                judul: 'Jelajah 5 Benua: Letak & Karakteristik Wilayah',
+                kategori: 'Geografi',
+                durasi: '12:30',
+                embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+            },
+            {
+                id: 3,
+                judul: 'Perdagangan Internasional & Ekonomi Kreatif',
+                kategori: 'Ekonomi',
+                durasi: '10:15',
+                embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+            }
+        ];
+
+        const BUKU_DATA = [
+            {
+                id: 1,
+                judul: 'Buku Siswa IPS Kelas IX - Kurikulum Merdeka',
+                penulis: 'Kemendikbudristek',
+                ukuran: '24 MB (PDF)',
+                tag: 'Buku Siswa Utama'
+            },
+            {
+                id: 2,
+                judul: 'Buku Panduan Guru IPS Kelas IX',
+                penulis: 'Kemendikbudristek',
+                ukuran: '18 MB (PDF)',
+                tag: 'Buku Pegangan Guru'
+            },
+            {
+                id: 3,
+                judul: 'Atlas Lengkap Dunia & Indonesia',
+                penulis: 'Tim Geografi',
+                ukuran: '35 MB (PDF)',
+                tag: 'Buku Pendukung'
+            }
+        ];
+
+        const QUIZ_QUESTIONS = [
+            {
+                q: "Salah satu faktor penghambat perubahan sosial budaya di masyarakat adalah...",
+                options: ["A. Kontak dengan budaya lain", "B. Sikap masyarakat yang sangat tradisional", "C. System pendidikan maju", "D. Penduduk yang heterogen"],
+                answer: 1,
+                category: "Sosiologi"
+            },
+            {
+                q: "Benua yang sering dipanggil sebagai 'Benua Biru' karena mayoritas penduduknya memiliki mata berwarna biru adalah...",
+                options: ["A. Asia", "B. Afrika", "C. Eropa", "D. Australia"],
+                answer: 2,
+                category: "Geografi"
+            },
+            {
+                q: "Kebijakan menjual barang di luar negeri dengan harga lebih murah daripada di dalam negeri dinamakan...",
+                options: ["A. Quota", "B. Tarip", "C. Dumping", "D. Embargo"],
+                answer: 2,
+                category: "Ekonomi"
+            },
+            {
+                q: "Naskah Proklamasi Kemerdekaan Indonesia diketik oleh...",
+                options: ["A. Sayuti Melik", "B. Sukarni", "C. B.M. Diah", "D. Chaerul Saleh"],
+                answer: 0,
+                category: "Sejarah"
+            },
+            {
+                q: "Organisasi Pasar Bebas di kawasan Asia Tenggara adalah...",
+                options: ["A. APEC", "B. AFTA", "C. NAFTA", "D. EU"],
+                answer: 1,
+                category: "Ekonomi"
+            }
+        ];
+
+        /* ==========================================
+           2. SPA NAVIGATION LOGIC
+           ========================================== */
+        function navigateTo(sectionId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
+            
+            // Show target section
+            const target = document.getElementById(`sec-${sectionId}`);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update Desktop Nav styles
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active-tab'));
+            const activeNav = document.getElementById(`nav-${sectionId}`);
+            if (activeNav) {
+                activeNav.classList.add('active-tab');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function toggleBab(id) {
+            const el = document.getElementById(id);
+            const icon = document.getElementById(`icon-${id}`);
+            if (el) {
+                el.classList.toggle('hidden');
+                if (icon) icon.classList.toggle('rotate-180');
+            }
+        }
+
+        function toggleAllAccordions(sem, show) {
+            const babs = sem === 's1' ? ['bab1-content', 'bab2-content'] : ['bab3-content', 'bab4-content'];
+            babs.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (show) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
+                }
+            });
+        }
+
+        /* ==========================================
+           3. RENDERERS & INTERACTION
+           ========================================== */
+        // RENDER BANK SOAL
+        function renderBankSoal(data) {
+            const container = document.getElementById('bankSoalContainer');
+            if (!container) return;
+            
+            if (data.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-slate-500">Tidak ada soal yang cocok dengan filter.</div>`;
+                return;
+            }
+
+            container.innerHTML = data.map((s, idx) => `
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-200 transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold px-2.5 py-1 rounded-md ${s.tipe === 'pg' ? 'bg-blue-100 text-blue-700' : 'bg-purple-100 text-purple-700'} uppercase">
+                            ${s.tipe === 'pg' ? 'Pilihan Ganda' : 'Esai'} - Bab ${s.bab}
+                        </span>
+                        <span class="text-xs text-slate-400">Soal #${idx + 1}</span>
+                    </div>
+                    <p class="font-medium text-slate-800 text-sm mb-3">${s.soal}</p>
+                    
+                    ${s.opsi ? `
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4 text-xs text-slate-600">
+                            ${s.opsi.map(o => `<div class="p-2 bg-slate-50 rounded-lg border border-slate-100">${o}</div>`).join('')}
+                        </div>
+                    ` : ''}
+
+                    <div id="pembahasan-${s.id}" class="hidden mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900">
+                        <strong>Kunci Jawaban:</strong> ${s.jawaban}<br>
+                        <span class="text-slate-600 mt-1 block"><strong>Pembahasan:</strong> ${s.pembahasan}</span>
+                    </div>
+
+                    <button onclick="togglePembahasan(${s.id})" class="mt-2 text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center">
+                        <i class="fa-solid fa-key mr-1"></i> Lihat Kunci & Pembahasan
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function filterBankSoal() {
+            const babVal = document.getElementById('filterBabSoal').value;
+            const tipeVal = document.getElementById('filterTipeSoal').value;
+
+            let filtered = BANK_SOAL_DATA;
+            if (babVal !== 'all') {
+                filtered = filtered.filter(s => s.bab === parseInt(babVal));
+            }
+            if (tipeVal !== 'all') {
+                filtered = filtered.filter(s => s.tipe === tipeVal);
+            }
+            renderBankSoal(filtered);
+        }
+
+        function togglePembahasan(id) {
+            const el = document.getElementById(`pembahasan-${id}`);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        // RENDER TUGAS / LKPD
+        function renderTugas() {
+            const container = document.getElementById('tugasListContainer');
+            if (!container) return;
+
+            container.innerHTML = TUGAS_DATA.map(t => `
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-xs font-bold px-2.5 py-1 bg-amber-100 text-amber-800 rounded-md">${t.kategori}</span>
+                            <span class="text-xs font-semibold text-rose-600"><i class="fa-regular fa-clock mr-1"></i> Batas: ${t.deadline}</span>
+                        </div>
+                        <h3 class="font-bold text-slate-800 text-base mb-2">${t.judul}</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-4">${t.deskripsi}</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span id="status-tugas-${t.id}" class="text-xs text-slate-400 font-medium">Belum Dikirim</span>
+                        <button onclick="simulasiKirimTugas(${t.id})" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-sm transition">
+                            <i class="fa-solid fa-upload mr-1"></i> Kumpul Tugas
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function simulasiKirimTugas(id) {
+            const statusEl = document.getElementById(`status-tugas-${id}`);
+            if (statusEl) {
+                statusEl.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i> Sudah Terkirim`;
+                statusEl.className = "text-xs text-emerald-600 font-bold";
+                alert("Tugas berhasil diunggah secara virtual!");
+            }
+        }
+
+        // RENDER VIDEO
+        function renderVideo() {
+            const container = document.getElementById('videoGridContainer');
+            if (!container) return;
+
+            container.innerHTML = VIDEO_DATA.map(v => `
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col">
+                    <div class="relative bg-slate-900 aspect-video flex items-center justify-center cursor-pointer group" onclick="openVideoModal('${v.judul}', '${v.embedUrl}')">
+                        <div class="w-12 h-12 bg-blue-600/90 text-white rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <span class="absolute bottom-2 right-2 bg-slate-900/80 text-white text-[10px] px-2 py-0.5 rounded">${v.durasi}</span>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-teal-600 bg-teal-50 px-2 py-0.5 rounded">${v.kategori}</span>
+                            <h4 class="font-bold text-slate-800 text-sm mt-2 leading-snug">${v.judul}</h4>
+                        </div>
+                        <button onclick="openVideoModal('${v.judul}', '${v.embedUrl}')" class="mt-4 text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center">
+                            <i class="fa-solid fa-circle-play mr-1"></i> Putar Video
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openVideoModal(title, url) {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            modalTitle.innerText = title;
+            modalBody.innerHTML = `
+                <div class="aspect-video w-full rounded-xl overflow-hidden bg-black">
+                    <iframe class="w-full h-full" src="${url}" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            `;
+            document.getElementById('globalModal').classList.remove('hidden');
+        }
+
+        // RENDER BUKU DIGITAL
+        function renderBuku() {
+            const container = document.getElementById('bukuGridContainer');
+            if (!container) return;
+
+            container.innerHTML = BUKU_DATA.map(b => `
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center flex flex-col justify-between">
+                    <div>
+                        <div class="w-20 h-28 bg-gradient-to-br from-blue-700 to-indigo-800 rounded-lg mx-auto shadow-md flex items-center justify-center text-white text-3xl mb-4">
+                            <i class="fa-solid fa-book-bookmark"></i>
+                        </div>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-600 rounded-full">${b.tag}</span>
+                        <h3 class="font-bold text-slate-800 text-base mt-3 mb-1">${b.judul}</h3>
+                        <p class="text-xs text-slate-500">${b.penulis} &bull; ${b.ukuran}</p>
+                    </div>
+
+                    <div class="mt-6 flex space-x-2">
+                        <button onclick="openEbookViewer('${b.judul}')" class="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition">
+                            <i class="fa-solid fa-eye mr-1"></i> Baca PDF
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openEbookViewer(title) {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            modalTitle.innerText = `Digital Reader - ${title}`;
+            modalBody.innerHTML = `
+                <div class="bg-slate-100 p-8 rounded-xl text-center space-y-4">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl mx-auto">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-base">${title}</h4>
+                    <p class="text-xs text-slate-600 max-w-sm mx-auto">Pratinjau e-Book Digital siap dibaca. Modul ini terintegrasi dengan viewer dokumen digital sekolah.</p>
+                    <div class="p-4 bg-white rounded-lg border border-slate-200 text-left text-xs space-y-2 text-slate-700">
+                        <div class="font-bold text-slate-900 border-b pb-1">Daftar Isi Buku:</div>
+                        <p>&bull; Bab 1: Perubahan Sosial Budaya (Hal. 1-45)</p>
+                        <p>&bull; Bab 2: Interaksi Antarruang Benua Asia & Lainnya (Hal. 46-110)</p>
+                        <p>&bull; Bab 3: Perdagangan Bebas & Ekonomi Kreatif (Hal. 111-175)</p>
+                        <p>&bull; Bab 4: Sejarah Indonesia Modern (Hal. 176-240)</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('globalModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('globalModal').classList.add('hidden');
+            document.getElementById('modalBody').innerHTML = '';
+        }
+
+        /* ==========================================
+           4. JURNAL REFLEKSI LOCALSTORAGE
+           ========================================== */
+        function loadJurnal() {
+            const saved = JSON.parse(localStorage.getItem('ips_jurnal_db') || '[]');
+            const container = document.getElementById('jurnalListContainer');
+            const countEl = document.getElementById('jurnalCount');
+
+            if (countEl) countEl.innerText = `${saved.length} Catatan`;
+
+            if (!container) return;
+            if (saved.length === 0) {
+                container.innerHTML = `<div class="p-6 bg-white rounded-2xl border border-slate-200 text-center text-xs text-slate-400">Belum ada jurnal tersimpan. Tuliskan refleksi belajar pertamamu!</div>`;
+                return;
+            }
+
+            container.innerHTML = saved.map((j, index) => `
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-xs text-blue-700">${j.nama}</span>
+                            <span class="text-[10px] text-slate-400">${j.tanggal}</span>
+                        </div>
+                        <h4 class="font-semibold text-xs text-slate-800 mb-1">Materi: ${j.materi}</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-2.5 rounded-lg border border-slate-100">${j.isi}</p>
+                    </div>
+                    <div class="mt-2 text-right">
+                        <button onclick="deleteJurnal(${index})" class="text-[10px] text-rose-500 hover:text-rose-700 font-medium">Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function saveJurnal(e) {
+            e.preventDefault();
+            const nama = document.getElementById('jurnalNama').value;
+            const materi = document.getElementById('jurnalMateri').value;
+            const isi = document.getElementById('jurnalIsi').value;
+
+            const newEntry = {
+                nama,
+                materi,
+                isi,
+                tanggal: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })
+            };
+
+            const saved = JSON.parse(localStorage.getItem('ips_jurnal_db') || '[]');
+            saved.unshift(newEntry);
+            localStorage.setItem('ips_jurnal_db', JSON.stringify(saved));
+
+            document.getElementById('formJurnal').reset();
+            loadJurnal();
+        }
+
+        function deleteJurnal(index) {
+            const saved = JSON.parse(localStorage.getItem('ips_jurnal_db') || '[]');
+            saved.splice(index, 1);
+            localStorage.setItem('ips_jurnal_db', JSON.stringify(saved));
+            loadJurnal();
+        }
+
+        /* ==========================================
+           5. GAME IPS LOGIC
+           ========================================== */
+        let gameScore = 0;
+
+        function startTebakGambarGame() {
+            const arena = document.getElementById('gameArena');
+            arena.classList.remove('hidden');
+
+            arena.innerHTML = `
+                <div class="max-w-md mx-auto text-center space-y-4">
+                    <div class="flex justify-between items-center text-xs font-bold text-slate-500 border-b pb-2">
+                        <span>Game 1: Tebak Tokoh & Peta</span>
+                        <span class="text-amber-600">Skor: <span id="currentMiniScore">0</span></span>
+                    </div>
+
+                    <div class="p-6 bg-slate-100 rounded-2xl flex items-center justify-center text-6xl shadow-inner border border-slate-200">
+                        <i class="fa-solid fa-user-ninja text-blue-700"></i>
+                    </div>
+
+                    <p class="font-bold text-slate-800 text-sm">Siapakah tokoh Pahlawan Nasional yang membacakan Teks Proklamasi 1945?</p>
+
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <button onclick="checkGameAns(true, 'Ir. Soekarno')" class="p-3 bg-slate-50 border hover:bg-blue-50 hover:border-blue-300 font-semibold rounded-xl text-slate-800 transition">Ir. Soekarno</button>
+                        <button onclick="checkGameAns(false, 'Moh. Hatta')" class="p-3 bg-slate-50 border hover:bg-blue-50 hover:border-blue-300 font-semibold rounded-xl text-slate-800 transition">Drs. Moh. Hatta</button>
+                        <button onclick="checkGameAns(false, 'Sutan Sjahrir')" class="p-3 bg-slate-50 border hover:bg-blue-50 hover:border-blue-300 font-semibold rounded-xl text-slate-800 transition">Sutan Sjahrir</button>
+                        <button onclick="checkGameAns(false, 'Ki Hajar Dewantara')" class="p-3 bg-slate-50 border hover:bg-blue-50 hover:border-blue-300 font-semibold rounded-xl text-slate-800 transition">Ki Hajar Dewantara</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function checkGameAns(isCorrect, name) {
+            if (isCorrect) {
+                gameScore += 20;
+                document.getElementById('gameHighScore').innerText = gameScore;
+                alert("Benar sekali! " + name + " adalah jawaban yang tepat. (+20 Poin)");
+            } else {
+                alert("Kurang tepat. Coba lagi!");
+            }
+        }
+
+        function startMatchGame() {
+            const arena = document.getElementById('gameArena');
+            arena.classList.remove('hidden');
+
+            arena.innerHTML = `
+                <div class="text-center space-y-4">
+                    <h3 class="font-bold text-slate-800 text-base">Match Card: Cocokkan Istilah IPS</h3>
+                    <p class="text-xs text-slate-500">Klik kartu pasangan yang sesuai.</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs max-w-lg mx-auto">
+                        <div class="p-4 bg-blue-50 border border-blue-200 font-bold rounded-xl text-blue-800">Evolusi</div>
+                        <div class="p-4 bg-teal-50 border border-teal-200 font-bold rounded-xl text-teal-800">Perubahan Lambat</div>
+                        <div class="p-4 bg-amber-50 border border-amber-200 font-bold rounded-xl text-amber-800">Dumping</div>
+                        <div class="p-4 bg-rose-50 border border-rose-200 font-bold rounded-xl text-rose-800">Harga Murah Ekspor</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ==========================================
+           6. TES SIMULASI INTERAKTIF TIMER LOGIC
+           ========================================== */
+        let currentQuizIndex = 0;
+        let quizUserAnswers = [];
+        let quizTimerInterval;
+        let quizTimeLeft = 600; // 10 mins
+
+        function startQuizSimulation() {
+            currentQuizIndex = 0;
+            quizUserAnswers = new Array(QUIZ_QUESTIONS.length).fill(null);
+            quizTimeLeft = 600;
+
+            document.getElementById('quizStartScreen').classList.add('hidden');
+            document.getElementById('quizResultScreen').classList.add('hidden');
+            document.getElementById('quizQuestionScreen').classList.remove('hidden');
+            document.getElementById('quizTimerBox').classList.remove('hidden');
+
+            startQuizTimer();
+            renderQuizQuestion();
+        }
+
+        function startQuizTimer() {
+            clearInterval(quizTimerInterval);
+            quizTimerInterval = setInterval(() => {
+                quizTimeLeft--;
+                const mins = Math.floor(quizTimeLeft / 60);
+                const secs = quizTimeLeft % 60;
+                document.getElementById('quizTimer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+                if (quizTimeLeft <= 0) {
+                    clearInterval(quizTimerInterval);
+                    finishQuiz();
+                }
+            }, 1000);
+        }
+
+        function renderQuizQuestion() {
+            const q = QUIZ_QUESTIONS[currentQuizIndex];
+            document.getElementById('quizProgressText').innerText = `Soal ${currentQuizIndex + 1} dari ${QUIZ_QUESTIONS.length}`;
+            document.getElementById('quizCategoryBadge').innerText = q.category;
+            document.getElementById('quizQuestionTitle').innerText = q.q;
+
+            const optionsContainer = document.getElementById('quizOptionsContainer');
+            optionsContainer.innerHTML = q.options.map((opt, idx) => {
+                const isSelected = quizUserAnswers[currentQuizIndex] === idx;
+                return `
+                    <button onclick="selectQuizOption(${idx})" class="w-full text-left p-3.5 rounded-xl border text-sm font-medium transition flex items-center justify-between ${isSelected ? 'bg-blue-50 border-blue-600 text-blue-900 shadow-sm' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'}">
+                        <span>${opt}</span>
+                        ${isSelected ? '<i class="fa-solid fa-circle-check text-blue-600"></i>' : '<i class="fa-regular fa-circle text-slate-300"></i>'}
+                    </button>
+                `;
+            }).join('');
+
+            document.getElementById('quizPrevBtn').disabled = currentQuizIndex === 0;
+            const nextBtn = document.getElementById('quizNextBtn');
+            if (currentQuizIndex === QUIZ_QUESTIONS.length - 1) {
+                nextBtn.innerHTML = `Selesai & Kirim <i class="fa-solid fa-check-double ml-1"></i>`;
+                nextBtn.className = "px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-semibold transition";
+            } else {
+                nextBtn.innerHTML = `Lanjut <i class="fa-solid fa-arrow-right ml-1"></i>`;
+                nextBtn.className = "px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold transition";
+            }
+        }
+
+        function selectQuizOption(optIndex) {
+            quizUserAnswers[currentQuizIndex] = optIndex;
+            renderQuizQuestion();
+        }
+
+        function navigateQuiz(dir) {
+            if (dir === 1 && currentQuizIndex === QUIZ_QUESTIONS.length - 1) {
+                finishQuiz();
+                return;
+            }
+            currentQuizIndex += dir;
+            if (currentQuizIndex < 0) currentQuizIndex = 0;
+            if (currentQuizIndex >= QUIZ_QUESTIONS.length) currentQuizIndex = QUIZ_QUESTIONS.length - 1;
+            renderQuizQuestion();
+        }
+
+        function finishQuiz() {
+            clearInterval(quizTimerInterval);
+
+            let correctCount = 0;
+            QUIZ_QUESTIONS.forEach((q, idx) => {
+                if (quizUserAnswers[idx] === q.answer) {
+                    correctCount++;
+                }
+            });
+
+            const score = Math.round((correctCount / QUIZ_QUESTIONS.length) * 100);
+
+            document.getElementById('quizQuestionScreen').classList.add('hidden');
+            document.getElementById('quizTimerBox').classList.add('hidden');
+            document.getElementById('quizResultScreen').classList.remove('hidden');
+
+            document.getElementById('resultScore').innerText = `${score} / 100`;
+            document.getElementById('resultAccuracy').innerText = `${correctCount} dari ${QUIZ_QUESTIONS.length} Soal Benar`;
+
+            const iconBox = document.getElementById('resultIcon');
+            const feedbackText = document.getElementById('resultFeedback');
+
+            if (score >= 75) {
+                iconBox.className = "w-24 h-24 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-4xl mx-auto";
+                iconBox.innerHTML = `<i class="fa-solid fa-trophy"></i>`;
+                feedbackText.innerText = "Sangat Bagus! Kamu memiliki pemahaman IPS yang tajam.";
+            } else {
+                iconBox.className = "w-24 h-24 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-4xl mx-auto";
+                iconBox.innerHTML = `<i class="fa-solid fa-face-smile"></i>`;
+                feedbackText.innerText = "Cukup Bagus! Pelajari kembali rangkuman materi untuk hasil maksimal.";
+            }
+        }
+
+        /* ==========================================
+           7. QUICK SEARCH IN HEADER
+           ========================================== */
+        function handleQuickSearch(e) {
+            const query = e.target.value.toLowerCase().trim();
+            if (e.key === 'Enter' && query !== '') {
+                // Perform quick modal search
+                const filteredSoal = BANK_SOAL_DATA.filter(s => s.soal.toLowerCase().includes(query));
+                const filteredVideo = VIDEO_DATA.filter(v => v.judul.toLowerCase().includes(query));
+
+                const modalTitle = document.getElementById('modalTitle');
+                const modalBody = document.getElementById('modalBody');
+                modalTitle.innerText = `Hasil Pencarian untuk: "${query}"`;
+
+                modalBody.innerHTML = `
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-slate-800 border-b pb-1">Soal Ditemukan (${filteredSoal.length})</h4>
+                        ${filteredSoal.length ? filteredSoal.map(s => `<p class="text-xs bg-slate-50 p-2 rounded">&bull; ${s.soal}</p>`).join('') : '<p class="text-xs text-slate-400">Tidak ada soal yang sesuai.</p>'}
+                        
+                        <h4 class="font-bold text-slate-800 border-b pb-1 mt-4">Video Ditemukan (${filteredVideo.length})</h4>
+                        ${filteredVideo.length ? filteredVideo.map(v => `<p class="text-xs bg-slate-50 p-2 rounded">&bull; ${v.judul}</p>`).join('') : '<p class="text-xs text-slate-400">Tidak ada video yang sesuai.</p>'}
+                    </div>
+                `;
+                document.getElementById('globalModal').classList.remove('hidden');
+            }
+        }
+
+        /* ==========================================
+           INITIALIZATION ON WINDOW LOAD
+           ========================================== */
+        window.onload = function() {
+            renderBankSoal(BANK_SOAL_DATA);
+            renderTugas();
+            renderVideo();
+            renderBuku();
+            loadJurnal();
+        };
+    </script>
+</body>
+</html>
